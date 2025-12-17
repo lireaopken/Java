@@ -1,0 +1,42 @@
+class playlist
+    // attributes
+    private int playlistId;
+    private String name;
+    private Song song;
+
+    // constructor
+    public Playlist(int playlistId, String name, Song song) {
+        this.playlistId = playlistId;
+        this.name = name;
+        this.song = song;
+    }
+
+    // getters
+    public int getPlaylistId() {
+        return playlistId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Song getSong() {
+        return song;
+    }
+
+    // setters
+    public void setName(String name) {
+   this.name = name;
+    }
+
+       public void setSong(Song song) {
+           this.song = song;
+    }
+
+    // method
+       public void displayPlaylist() {
+           System.out.println("Playlist ID: " + playlistId);
+           System.out.println("Playlist Name: " + name);
+           System.out.println("Song in playlist: " + song.getTitle());
+    }
+}
