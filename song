@@ -1,0 +1,54 @@
+class song(
+    // arttibutes
+    private int songId;
+    private String title;
+    private int duration; // in seconds
+    private Artist artist;
+
+    // constructor
+    public Song(int songId, String title, int duration, Artist artist) {
+        this.songId = songId;
+        this.title = title;
+        this.duration = duration;
+        this.artist = artist;
+}
+    // getters
+    public int getSongId() {
+        return songId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    // setters
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    // method
+    public void displaySong() {
+        System.out.println("Song ID: " + songId);
+        System.out.println("Title: " + title);
+        System.out.println("Duration: " + duration + " seconds");
+        System.out.println("Artist: " + artist.getName());
+    }
+}
+
+
+
+
+
+

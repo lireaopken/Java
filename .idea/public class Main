@@ -1,0 +1,37 @@
+public class Main {
+    public static void main(String[] args) {
+
+        // create artists
+        Artist artist1 = new Artist(1, "Imagine Dragons", "USA");
+        Artist artist2 = new Artist(2, "Adele", "UK");
+
+        // create songs
+        Song song1 = new Song(101, "Believer", 204, artist1);
+        Song song2 = new Song(102, "Hello", 295, artist2);
+
+        // create playlists
+        Playlist playlist1 = new Playlist(1, "My Favorites", song1);
+        Playlist playlist2 = new Playlist(2, "Chill Songs", song2);
+
+        // output to console
+        System.out.println("=== Artist Info ===");
+        artist1.displayArtist();
+        System.out.println();
+
+        System.out.println("=== Song Info ===");
+        song1.displaySong();
+        System.out.println();
+
+        System.out.println("=== Playlist Info ===");
+        playlist1.displayPlaylist();
+        System.out.println();
+
+        // compare objects
+        System.out.println("=== Comparison ===");
+        if (song1.getDuration() > song2.getDuration()) {
+            System.out.println(song1.getTitle() + " is longer than " + song2.getTitle());
+        } else {
+            System.out.println(song2.getTitle() + " is longer than " + song1.getTitle());
+        }
+    }
+}
