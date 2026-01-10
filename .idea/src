@@ -1,5 +1,24 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Media {
+    protected String title;
+
+    public Media(String title) {
+        this.title = title;
+    }
+
+    public void play() {
+        System.out.println("Playing: " + title);
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+}
+
 class Artist {
-    // attributes
     private int artistId;
     private String name;
     private String country;
@@ -10,32 +29,130 @@ class Artist {
         this.country = country;
     }
 
-    // getters
-    public int getArtistId() {
+    public String getName() { return name; }
+
+    @Override
+    public String toString() {
+        return artistId + ": " + name + " (" + country + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Artist)) return false;
+        Artist a = (Artist) o;
+        return this.artistId == a.artistId;
+    }
+
+    @Override
+    public int hashCode() {
         return artistId;
     }
+}
 
-    public String getName() {
-        return name;
+class Song extends Media { 
+    private int songId;
+    private Artist artist;
+
+    public Song(int songId, String title, Artist artist) {
+        super(title);
+        this.songId = songId;
+        this.artist = artist;
     }
 
-    public String getCountry() {
-        return country;
+    public String getTitle() { return title; }
+    public Artist getArtist() { return artist; }
+
+
+    @Override
+    public void play() {
+        System.out.println("Playing song: " + title + " by " + artist.getName());
     }
 
-    // setters
-    public void setName(String name) {
+    @Override
+    public String toString() {
+        return songId + ": " + title + " by " + artist.getName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Song)) return false;
+        Song s = (Song) o;
+        return this.songId == s.songId;
+    }
+
+    @Override
+    public int hashCode() {
+        return songId;
+    }
+}
+
+class Playlist {
+    private int playlistId;
+    private String name;
+    private ArrayList<Song> songs = new ArrayList<>();
+
+    public Playlist(int playlistId, String name) {
+        this.playlistId = playlistId;
         this.name = name;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void addSong(Song s) {
+        songs.add(s);
     }
 
-    // method
-    public void displayArtist() {
-        System.out.println("Artist ID: " + artistId);
-        System.out.println("Name: " + name);
-        System.out.println("Country: " + country);
+    public void displaySongs() {
+        for (Song s : songs) System.out.println(s);
+    }
+
+    public ArrayList<Song> getSongs() { return songs; }
+
+    @Override
+    public String toString() {
+        return playlistId + ": " + name;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Artist a1 = new Artist(1, "Taylor Swift", "USA");
+        Artist a2 = new Artist(2, "Dimash", "Kazakhstan");
+
+        Song s1 = new Song(1, "Love Story", a1);
+        Song s2 = new Song(2, "SOS", a2);
+        Song s3 = new Song(3, "Blank Space", a1);
+
+        Playlist playlist = new Playlist(1, "My Playlist");
+        playlist.addSong(s1);
+        playlist.addSong(s2);
+        playlist.addSong(s3);
+        System.out.println("\nAll songs:");
+        playlist.displaySongs();
+
+        //SEARCH
+        System.out.print("\nSearch song title: ");
+        String find = sc.nextLine();
+        boolean found = false;
+        for (Song s : playlist.getSongs()) {
+            if (s.getTitle().equalsIgnoreCase(find)) {
+                System.out.println("Found: " + s);
+                found = true;
+            }
+        }
+        if (!found) System.out.println("Song not found.");
+
+        //FILTER
+        System.out.print("\nEnter artist to filter: ");
+        String byArtist = sc.nextLine();
+        for (Song s : playlist.getSongs()) {
+            if (s.getArtist().getName().equalsIgnoreCase(byArtist)) {
+                System.out.println("Song: " + s);
+            }
+        }
+
+     
+        System.out.println("\nPlaying all:");
+        for (Song s : playlist.getSongs()) s.play();
     }
 }

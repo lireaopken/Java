@@ -1,0 +1,35 @@
+class Artist{
+   //attributes
+   private int artistld;
+   private String name;
+   private String country;
+
+   //constructor
+   public Artist(int artistld, String name, String country){
+   this.artistld=artistld;
+   this.name=name;
+   this.country=country;
+   }
+   //getters
+   public int getArtistId(){
+   return artistId;
+   }
+   public String getName(){
+   retutn name;
+   }
+   public String getCountry(){
+   return country;
+   }
+   //setters
+   public viod setName(String name){
+       this.name=name;
+   }
+   public viod setCountry(String country){
+        this.country=country;
+   }
+   //method
+   pubilc viod displayArtist(){
+      System.out.printin("Artist ID:"+artistId);
+      System.out.printin("Name:"+name);
+      System.out.peintin("country:"+country);
+   }
